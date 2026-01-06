@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/s-Ira-d/mini-project/issues"
   },
-  "homepage": "https://github.com/s-Ira-d/mini-project#readme",
+  "homepage": "https://s-Ira-d.github.io/mini-project",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.16.3",
     "gh-pages": "^6.3.0"
