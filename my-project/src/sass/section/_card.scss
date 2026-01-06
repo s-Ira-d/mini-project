@@ -1,1 +1,75 @@
 @use "../base/variable" as *;
+
+body {
+  background-color: $variable;
+}
+
+.search-form {
+  display: block;
+  margin: 0 auto;
+  width: 400px;
+  margin-top: 10px;
+}
+
+input {
+  width: 400px;
+  border: none;
+  height: 50px;
+  border-radius: 10px;
+  padding-left: 15px;
+}
+
+.gallery {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.list_item {
+  background-color: rgb(230, 230, 230);
+  flex-basis: 100%;
+  transition: 0.5s;
+  &:hover {
+    transform: scale(1.1);
+  }
+  @media screen and (min-width: 768px) {
+    flex-basis: calc((100% - 40px) / 3);
+  }
+  @media screen and (min-width: 1200px) {
+    flex-basis: calc((100% - 60px) / 4);
+  }
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.stats-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.load_btn {
+  //display: none;
+  margin: 0 auto;
+  margin-top: 10px;
+  color: rgb(28, 28, 28);
+  background-color: $variable;
+  padding: 10px 30px;
+  border-radius: 20%;
+  border: none;
+  transition: 1s;
+  &:hover {
+    background-color: rgb(172, 171, 171);
+    color: rgb(57, 57, 57);
+  }
+}

@@ -9,41 +9,41 @@ let searchText = "";
 
 async function drawPhotos(data) {
   const newPhoto = data
-    .map((webformatURL, tags, likes, views, comments, downloads) => {
-      `
-        <li>
-        <div class="photo-card">
-  <img src="${webformatURL}" alt="${tags}" />
-
-  <div class="stats">
-    <p class="stats-item">
-      <i class="material-icons">thumb_up</i>
-     ${likes}
-    </p>
-    <p class="stats-item">
-      <i class="material-icons">visibility</i>
-   ${views}
-    </p>
-    <p class="stats-item">
-      <i class="material-icons">comment</i>
-      ${comments}
-    </p>
-    <p class="stats-item">
-      <i class="material-icons">cloud_download</i>
-       ${downloads}
-    </p>
-  </div>
-</div>
+    .map(
+      ({ webformatURL, tags, likes, views, comments, downloads }) =>
+        `
+        <li class="list__item">
+            <div class="photo-card">
+                <img src=${webformatURL} alt=${tags} />
+                <div class="stats">
+                    <p class="stats-item">
+                        <i class="material-icons">thumb_up</i>
+                        ${likes}
+                    </p>
+                    <p class="stats-item">
+                        <i class="material-icons">visibility</i>
+                        ${views}
+                    </p>
+                    <p class="stats-item">
+                        <i class="material-icons">comment</i>
+                        ${comments}
+                    </p>
+                    <p class="stats-item">
+                        <i class="material-icons">cloud_download</i>
+                        ${downloads}
+                    </p>
+            </div>
+            </div>
         </li>
-        `;
-    })
-    .join();
+        `
+    )
+    .join("");
   galleryList.insertAdjacentHTML("beforeend", newPhoto);
 }
 
 const getPhotos = async () => {
   return await fetch(
-    ` https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${searchForm}&page=${page}&per_page=${PER_PAGE}&key=${API_KEY}`
+    `https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${searchText}&page=${page}&per_page=${PER_PAGE}&key=${API_KEY}`
   )
     .then((res) => res.json())
     .then((data) => data.hits)
@@ -56,18 +56,17 @@ searchForm.addEventListener("submit", async (event) => {
     clear();
     return;
   }
+  const text = event.currentTarget.elements.query.value;
+  searchText = text;
+  clear();
 
   const images = await getPhotos();
   if (images.length === 0) {
-    galleryList.innerHTML = "<p>nothing</p>";
+    galleryList.innerHTML = "<p>Nothing</p>";
   } else {
     await load();
-    loadBtn.style.display = block;
+    loadBtn.style.display = "block";
   }
-
-  const text = event.currentTarget.elements.query.value;
-  searchText = text;
-  await load();
 });
 
 async function load() {

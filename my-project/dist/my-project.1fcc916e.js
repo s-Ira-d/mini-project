@@ -207,7 +207,7 @@
       });
     }
   }
-})({"eC1pS":[function(require,module,exports,__globalThis) {
+})({"iUuJv":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
@@ -722,11 +722,35 @@ const PER_PAGE = 12;
 let page = 1;
 let searchText = "";
 async function drawPhotos(data) {
-    const newPhoto = data.map((webformatURL, tags, likes, views, comments, downloads)=>{}).join();
+    const newPhoto = data.map(({ webformatURL, tags, likes, views, comments, downloads })=>`
+        <li class="list__item">
+            <div class="photo-card">
+                <img src=${webformatURL} alt=${tags} />
+                <div class="stats">
+                    <p class="stats-item">
+                        <i class="material-icons">thumb_up</i>
+                        ${likes}
+                    </p>
+                    <p class="stats-item">
+                        <i class="material-icons">visibility</i>
+                        ${views}
+                    </p>
+                    <p class="stats-item">
+                        <i class="material-icons">comment</i>
+                        ${comments}
+                    </p>
+                    <p class="stats-item">
+                        <i class="material-icons">cloud_download</i>
+                        ${downloads}
+                    </p>
+            </div>
+            </div>
+        </li>
+        `).join("");
     galleryList.insertAdjacentHTML("beforeend", newPhoto);
 }
 const getPhotos = async ()=>{
-    return await fetch(` https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${searchForm}&page=${page}&per_page=${PER_PAGE}&key=${API_KEY}`).then((res)=>res.json()).then((data)=>data.hits).catch((error)=>console.log(error));
+    return await fetch(`https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${searchText}&page=${page}&per_page=${PER_PAGE}&key=${API_KEY}`).then((res)=>res.json()).then((data)=>data.hits).catch((error)=>console.log(error));
 };
 searchForm.addEventListener("submit", async (event)=>{
     event.preventDefault();
@@ -734,15 +758,15 @@ searchForm.addEventListener("submit", async (event)=>{
         clear();
         return;
     }
-    const images = await getPhotos();
-    if (images.length === 0) galleryList.innerHTML = "<p>nothing</p>";
-    else {
-        await load();
-        loadBtn.style.display = block;
-    }
     const text = event.currentTarget.elements.query.value;
     searchText = text;
-    await load();
+    clear();
+    const images = await getPhotos();
+    if (images.length === 0) galleryList.innerHTML = "<p>Nothing</p>";
+    else {
+        await load();
+        loadBtn.style.display = "block";
+    }
 });
 async function load() {
     const images = await getPhotos();
@@ -757,6 +781,6 @@ loadBtn.addEventListener("click", async ()=>{
     await load();
 });
 
-},{}]},["eC1pS","fILKw"], "fILKw", "parcelRequire716c", {})
+},{}]},["iUuJv","fILKw"], "fILKw", "parcelRequire716c", {})
 
 //# sourceMappingURL=my-project.1fcc916e.js.map
