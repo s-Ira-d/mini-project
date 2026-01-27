@@ -4,12 +4,8 @@
   "scripts": {
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html --no-cache --public-url ./",
-    "deploy": "gh-pages -d dist",
-    "predeploy": "npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/s-Ira-d/mini-project.git"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "",

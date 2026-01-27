@@ -1,17 +1,8 @@
-.conteiner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15 px;
+@use "../base/variable" as *;
 
-  @media screen and (min-width: 400px) {
-    width: 400px;
-  }
-
-  @media screen and (min-width: 768px) {
-    width: 768px;
-  }
-
-  @media screen and (min-width: 1200px) {
-    width: 1200px;
-  }
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, var.$bg, #111a33);
+  color: var.$text;
 }

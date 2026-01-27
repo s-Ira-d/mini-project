@@ -5,7 +5,7 @@ const galleryList = document.getElementById("galleryList");
 const API_KEY = "53972215-908d74d328bb55f5faa57c2c1";
 const PER_PAGE = 12;
 let page = 1;
-let searchText = "";
+let searchText = " ";
 
 async function drawPhotos(data) {
   const newPhoto = data
@@ -79,7 +79,9 @@ function clear() {
   page = 1;
 }
 
-loadBtn.addEventListener("click", async () => {
-  page += 1;
-  await load();
-});
+if (loadBtn) {
+  loadBtn.addEventListener("click", async () => {
+    page += 1;
+    await load();
+  });
+}
